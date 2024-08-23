@@ -10,7 +10,6 @@ This project is composed of several steps:
 If you want to view the project in full detail, you can download the project files and explore them at will. Here I will outline the most important steps and actions within the project.
 # Data Collection
 ---
-0:00-48:15
 In this step, I collected two different sets of data using web scraping. First, I extracted the group tables of the FIFA 2022 World Cup and then extracted the list of fixtures of the 2022 World Cup and the results historical data of previous world cups. The source of the data is Wikipedia. I used Pandas, BeautifulSoup for completing this part.
 
 ## Group Tables Extraction
@@ -27,7 +26,8 @@ all_tables = pd.read_html('https://web.archive.org/web/202211115040351/https://e
 all_tables [26]
 ```
 
-![[1446-02-19 12_16_40-Extract WC22 Group Tables.ipynb - World Cup 2022 Prediction Model - Visual Studi.png]]
+![1446-02-19 12_16_40-Extract WC22 Group Tables ipynb - World Cup 2022 Prediction Model - Visual Studi](https://github.com/user-attachments/assets/f2bc3a0c-33b9-480c-b231-8e469dc54d2f)
+
 
 ### Storing group tables in dataframe and assigning a letter to each group
 
@@ -47,7 +47,8 @@ for letter, i in zip(alphabet, range(12, 68, 7)):
 dict_table.keys()
 ```
 
-![[1446-02-19 12_20_02-Extract WC22 Group Tables.ipynb - World Cup 2022 Prediction Model - Visual Studi.png]]
+![1446-02-19 12_20_02-Extract WC22 Group Tables ipynb - World Cup 2022 Prediction Model - Visual Studi](https://github.com/user-attachments/assets/57edbfb2-daad-4c9e-8dfd-5179c96568c8)
+
 
 #### Example Stored Table
 
@@ -55,7 +56,8 @@ dict_table.keys()
 dict_table['Group E']
 ```
 
-![[1446-02-19 12_21_50-Extract WC22 Group Tables.ipynb - World Cup 2022 Prediction Model - Visual Studi.png]]
+![1446-02-19 12_21_50-Extract WC22 Group Tables ipynb - World Cup 2022 Prediction Model - Visual Studi](https://github.com/user-attachments/assets/672649e4-422f-4f63-bff8-f7361ab05968)
+
 
 ### Export group tables in a flat file using Pickle
 
@@ -75,11 +77,11 @@ groups_df_file.close()
 print(groups)
 ```
 
-![[1446-02-19 12_24_56-Extract WC22 Group Tables.ipynb - World Cup 2022 Prediction Model - Visual Studi.png]]
+![1446-02-19 12_24_56-Extract WC22 Group Tables ipynb - World Cup 2022 Prediction Model - Visual Studi](https://github.com/user-attachments/assets/72fc8232-b98b-446b-acbc-ce301c9e2bbd)
+
 
 ## Fixture List and Historical Data Extraction
 ---
-Timestamp: 17:22
 
 Using a Python and the BeautifulSoup library, I scraped the list of matches of the Qatar 2022 FIFA World Cup and the historical data of the previous world cups. Here is how I did it:
 
@@ -97,7 +99,7 @@ soup = BeautifulSoup(content, 'lxml')
 print(response.text)
 ```
 
-![[1446-02-19 15_43_13-Extract WC22 Fixtures + Historical WC Match Data.ipynb - World Cup 2022 Predicti.png]]
+![1446-02-19 15_43_13-Extract WC22 Fixtures + Historical WC Match Data ipynb - World Cup 2022 Predicti](https://github.com/user-attachments/assets/36a0a0ec-a051-4958-9a5e-18b72dd03f23)
 
 ### Extract matches and storing results (2014 WC)
 
@@ -115,7 +117,8 @@ for match in matches:
     print(match.find('th', class_ = 'faway').get_text())
 ```
 
-![[1446-02-19 15_44_17-Extract WC22 Fixtures + Historical WC Match Data.ipynb - World Cup 2022 Predicti.png]]
+![1446-02-19 15_44_17-Extract WC22 Fixtures + Historical WC Match Data ipynb - World Cup 2022 Predicti](https://github.com/user-attachments/assets/5e574fea-e600-47f7-a9c0-b24cc3d4aa32)
+
 
 ```python
 home = []
@@ -145,7 +148,8 @@ df_football['year'] = '2014'
 print(df_football)
 ```
 
-![[1446-02-19 15_45_16-Extract WC22 Fixtures + Historical WC Match Data.ipynb - World Cup 2022 Predicti.png]]
+![1446-02-19 15_45_16-Extract WC22 Fixtures + Historical WC Match Data ipynb - World Cup 2022 Predicti](https://github.com/user-attachments/assets/10f09ce6-fbbe-419b-9460-fd8572d2c819)
+
 
 ### Function to extrat rest of World Cups' historical data
 
@@ -191,7 +195,8 @@ Function test:
 print(get_matches('2018'))
 ```
 
-![[1446-02-19 15_46_33-Extract WC22 Fixtures + Historical WC Match Data.ipynb - World Cup 2022 Predicti.png]]
+![1446-02-19 15_46_33-Extract WC22 Fixtures + Historical WC Match Data ipynb - World Cup 2022 Predicti](https://github.com/user-attachments/assets/86f1c6b7-7a56-4177-8355-56c34409f5d9)
+
 
 ### Extract World Cup 2022 Fixture List and store in CSV
 ```python
@@ -310,7 +315,6 @@ df_fifa.to_csv("fifa_worldcup_missing_data.csv", index=False)
 ```
 # Data Cleaning and Preparation
 ---
-48:15-1:18:43
 
 ## Cutting extra spaces from df_fixture
 ```python
@@ -321,7 +325,8 @@ df_fixture['away'] = df_fixture['away'].str.strip()
 df_fixture
 ```
 
-![[1446-02-19 16_18_24-Data Cleaning & Transformation.ipynb - World Cup 2022 Prediction Model - Visual .png]]
+
+![1446-02-19 16_18_24-Data Cleaning   Transformation ipynb - World Cup 2022 Prediction Model - Visual ](https://github.com/user-attachments/assets/6dbd6079-2d65-463f-abf5-59259b7c8e84)
 
 
 ## Clean df_missing_data and merging with df_historical_data
@@ -344,7 +349,8 @@ df_historical_data.sort_values('year', inplace = True)
 df_historical_data
 ```
 
-![[1446-02-19 16_19_41-Data Cleaning & Transformation.ipynb - World Cup 2022 Prediction Model - Visual .png]]
+![1446-02-19 16_19_41-Data Cleaning   Transformation ipynb - World Cup 2022 Prediction Model - Visual ](https://github.com/user-attachments/assets/a1adb177-cae3-40c8-bf77-72af570ad781)
+
 
 ## Cleaning df_historical_data
 
@@ -367,7 +373,8 @@ df_historical_data['score'] = df_historical_data['score'].str.replace('[^\d–]'
 df_historical_data['score']
 ```
 
-![[1446-02-19 16_23_17-Data Cleaning & Transformation.ipynb - World Cup 2022 Prediction Model - Visual .png]]
+![1446-02-19 16_23_17-Data Cleaning   Transformation ipynb - World Cup 2022 Prediction Model - Visual ](https://github.com/user-attachments/assets/299ba69e-faef-4f26-9a1a-fe1de289f8e6)
+
 
 ```python
 # splitting score columns into home and away goals and drop the original score column
@@ -379,7 +386,8 @@ df_historical_data.drop('score', axis = 1, inplace = True)
 df_historical_data
 ```
 
-![[1446-02-19 16_24_11-Data Cleaning & Transformation.ipynb - World Cup 2022 Prediction Model - Visual .png]]
+![1446-02-19 16_24_11-Data Cleaning   Transformation ipynb - World Cup 2022 Prediction Model - Visual ](https://github.com/user-attachments/assets/c40893f1-a7eb-43ff-97a5-22a6347db38c)
+
 
 ```python
 # rename columns and change data types
@@ -393,7 +401,8 @@ df_historical_data = df_historical_data.astype({'HomeGoals': int, 'AwayGoals': i
 df_historical_data
 ```
 
-![[1446-02-19 16_24_54-Data Cleaning & Transformation.ipynb - World Cup 2022 Prediction Model - Visual .png]]
+![1446-02-19 16_24_54-Data Cleaning   Transformation ipynb - World Cup 2022 Prediction Model - Visual ](https://github.com/user-attachments/assets/4d296940-7bf7-47df-95eb-f25844e04fc3)
+
 
 ```python
 # creating new column "TotalGoals"
@@ -403,7 +412,8 @@ df_historical_data ['TotalGoals'] = df_historical_data['HomeGoals'] + df_histori
 df_historical_data
 ```
 
-![[1446-02-19 16_25_34-Data Cleaning & Transformation.ipynb - World Cup 2022 Prediction Model - Visual .png]]
+![1446-02-19 16_25_34-Data Cleaning   Transformation ipynb - World Cup 2022 Prediction Model - Visual ](https://github.com/user-attachments/assets/8a192aa1-6f37-4b9d-b7ad-9cf66967a57d)
+
 
 ## Export clean data
 
@@ -415,7 +425,6 @@ df_fixture.to_csv('clean_fifa_worldcup_fixture22.csv', index = False)
 
 # Building the Model
 ---
-1:18:43-2:14:57
 
 ## Calculate Team Strength
 
@@ -441,7 +450,8 @@ df_team_strength = pd.concat([df_home, df_away], ignore_index=True).groupby('Tea
 df_team_strength
 ```
 
-![[1446-02-19 17_48_40-Model for Prediction.ipynb - World Cup 2022 Prediction Model - Visual Studio Cod.png]]
+![1446-02-19 17_48_40-Model for Prediction ipynb - World Cup 2022 Prediction Model - Visual Studio Cod](https://github.com/user-attachments/assets/fefeff09-773f-4ac2-8823-4affea872853)
+
 ## Function predict_points
 
 ```python
@@ -536,7 +546,9 @@ Sample Group:
 wc22_groups['Group A']
 ```
 
-![[1446-02-19 17_52_21-Model for Prediction.ipynb - World Cup 2022 Prediction Model - Visual Studio Cod.png]]
+![1446-02-19 17_52_21-Model for Prediction ipynb - World Cup 2022 Prediction Model - Visual Studio Cod](https://github.com/user-attachments/assets/8acc3d75-e958-4a03-a294-c16df99c5a43)
+
+
 ### Round of 16
 
 ```python
@@ -559,7 +571,8 @@ df_fixture_knockout['winner'] = '?'
 df_fixture_knockout
 ```
 
-![[1446-02-19 17_53_08-Model for Prediction.ipynb - World Cup 2022 Prediction Model - Visual Studio Cod.png]]
+![1446-02-19 17_53_08-Model for Prediction ipynb - World Cup 2022 Prediction Model - Visual Studio Cod](https://github.com/user-attachments/assets/7ad83cb2-98fe-4d4b-b433-a24e01ca305c)
+
 
 ```python
 # create get_winner function
@@ -587,7 +600,9 @@ def get_winner(df_fixture_updated):
 get_winner(df_fixture_knockout)
 ```
 
-![[1446-02-19 17_53_47-Model for Prediction.ipynb - World Cup 2022 Prediction Model - Visual Studio Cod.png]]
+![1446-02-19 17_53_47-Model for Prediction ipynb - World Cup 2022 Prediction Model - Visual Studio Cod](https://github.com/user-attachments/assets/edbdd938-3530-4dbb-a2c4-14e15df7b8ff)
+
+
 ### Quarter-finals
 
 ```python
@@ -610,38 +625,43 @@ def update_table(df_fixture_round_1, df_fixture_round_2):
 update_table(df_fixture_knockout, df_fixture_quarter)
 ```
 
-![[1446-02-19 17_54_38-Model for Prediction.ipynb - World Cup 2022 Prediction Model - Visual Studio Cod.png]]
+
+![1446-02-19 17_54_38-Model for Prediction ipynb - World Cup 2022 Prediction Model - Visual Studio Cod](https://github.com/user-attachments/assets/67235d38-82ee-401d-b679-5591a1439b1c)
 
 ```python
 get_winner(df_fixture_quarter)
 ```
 
-![[1446-02-19 17_55_06-Model for Prediction.ipynb - World Cup 2022 Prediction Model - Visual Studio Cod.png]]
+![1446-02-19 17_55_06-Model for Prediction ipynb - World Cup 2022 Prediction Model - Visual Studio Cod](https://github.com/user-attachments/assets/e675522b-c590-4608-a155-d5589574f54c)
+
+
 ### Semi-finals
 
 ```python
 update_table(df_fixture_quarter, df_fixture_semi)
 ```
 
-![[1446-02-19 17_55_38-Model for Prediction.ipynb - World Cup 2022 Prediction Model - Visual Studio Cod.png]]
-
+![1446-02-19 17_55_38-Model for Prediction ipynb - World Cup 2022 Prediction Model - Visual Studio Cod](https://github.com/user-attachments/assets/5e5832f7-a274-4eb8-9601-61fdb98a5989)
 
 ```python
 get_winner(df_fixture_semi)
 ```
 
-![[1446-02-19 17_55_44-Model for Prediction.ipynb - World Cup 2022 Prediction Model - Visual Studio Cod.png]]
+![1446-02-19 17_55_44-Model for Prediction ipynb - World Cup 2022 Prediction Model - Visual Studio Cod](https://github.com/user-attachments/assets/4cb23f13-7188-4ce9-9817-4b087c121852)
+
+
 ### Final
 
 ```python
 update_table(df_fixture_semi, df_fixture_final)
 ```
 
-![[1446-02-19 17_56_19-Model for Prediction.ipynb - World Cup 2022 Prediction Model - Visual Studio Cod.png]]
+![1446-02-19 17_56_19-Model for Prediction ipynb - World Cup 2022 Prediction Model - Visual Studio Cod](https://github.com/user-attachments/assets/05da5bc9-2a87-4180-b2c2-ad9054a7be79)
+
 
 ```python
 get_winner(df_fixture_final)
 ```
 
 
-![[1446-02-19 17_56_42-Model for Prediction.ipynb - World Cup 2022 Prediction Model - Visual Studio Cod.png]]
+![1446-02-19 17_56_42-Model for Prediction ipynb - World Cup 2022 Prediction Model - Visual Studio Cod](https://github.com/user-attachments/assets/20ddf629-a6ea-40ee-8bef-bb3bb4142b35)
